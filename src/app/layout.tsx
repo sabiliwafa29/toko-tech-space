@@ -1,27 +1,49 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { Header } from "@/components/layout/Header";
+import { Footer } from "@/components/layout/Footer";
+import { Preloader } from "@/components/layout/Preloader";
+import { CursorBlob } from "@/components/ui/CursorBlob";
 
 export const metadata: Metadata = {
-  title: "Toko Tech Space — Next Cosmic Era of Digital Commerce & Software",
-  description:
-    "Engineering the next cosmic era of high-performance web applications, autonomous AI pipelines, and deep-space digital architectures.",
   metadataBase: new URL("https://tokotechkekinian.biz.id"),
+  title: "LPAS - Architecture and Interiors",
+  description:
+    "Clear Process. Creative Results. Human-centered. Always Curious. At LPAS, we design with people at the center and purpose at every turn.",
+  keywords: [
+    "LPAS",
+    "Architecture",
+    "Interiors",
+    "Housing",
+    "Higher Education",
+    "Civic Architecture",
+    "Commercial Design",
+    "Sacramento",
+    "Oakland"
+  ],
   openGraph: {
-    title: "Toko Tech Space — Next Cosmic Era of Digital Commerce",
-    description: "Discover deep-space digital experiences, autonomous systems, and modern web architectures.",
+    title: "LPAS - Architecture and Interiors",
+    description:
+      "Clear Process. Creative Results. Human-centered. Always Curious. At LPAS, we design with people at the center and purpose at every turn.",
     url: "https://tokotechkekinian.biz.id",
-    siteName: "Toko Tech Space",
-    locale: "id_ID",
-    type: "website",
+    siteName: "LPAS Architecture + Design",
+    images: [
+      {
+        url: "https://lpas.com/wp-content/uploads/2026/01/Contact-LPAS.jpg",
+        width: 2500,
+        height: 985,
+        alt: "LPAS Architecture + Design"
+      }
+    ],
+    locale: "en_US",
+    type: "website"
   },
   twitter: {
     card: "summary_large_image",
-    title: "Toko Tech Space — Next Cosmic Era of Digital Commerce",
-    description: "Discover deep-space digital experiences, autonomous systems, and modern web architectures.",
-  },
-  icons: {
-    icon: "/favicon.ico",
-  },
+    title: "LPAS - Architecture and Interiors",
+    description: "Clear Process. Creative Results. Human-centered. Always Curious.",
+    images: ["https://lpas.com/wp-content/uploads/2026/01/Contact-LPAS.jpg"]
+  }
 };
 
 export default function RootLayout({
@@ -30,11 +52,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
-      <head>
-        <meta name="theme-color" content="#030014" />
-      </head>
-      <body className="antialiased bg-[#030014] text-slate-100">{children}</body>
+    <html lang="en">
+      <body className="antialiased selection:bg-[#262626] selection:text-white">
+        <Preloader />
+        <CursorBlob />
+        <Header />
+        <main className="min-h-screen">
+          {children}
+        </main>
+        <Footer />
+      </body>
     </html>
   );
 }
