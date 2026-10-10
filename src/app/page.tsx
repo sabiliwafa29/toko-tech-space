@@ -1,131 +1,60 @@
 import Link from "next/link";
-import { HomeHero } from "@/components/sections/HomeHero";
-import { ProjectCard } from "@/components/sections/ProjectCard";
-import { LatestUpdatesList } from "@/components/sections/LatestUpdatesList";
-import { ButtonArrow } from "@/components/ui/ButtonArrow";
-import { PROJECTS } from "@/data/projects";
+import { HeroFlagship } from "@/components/sections/HeroFlagship";
+import { BentoGridShowcase } from "@/components/sections/BentoGridShowcase";
+import { ExplodedViewInteractive } from "@/components/sections/ExplodedViewInteractive";
+import TelemetryMetrics from "@/components/sections/TelemetryMetrics";
 
 export default function HomePage() {
-  const lasPositas = PROJECTS.find((p) => p.slug === "las-positas-college-academic-support-building")!;
-  const prospera = PROJECTS.find((p) => p.slug === "prospera-at-fiddyment-ranch")!;
-  const ucDavis = PROJECTS.find((p) => p.slug === "uc-davis-health-folsom-medical-care-clinic")!;
-  const frederic = PROJECTS.find((p) => p.slug === "the-frederic")!;
-  const chp = PROJECTS.find((p) => p.slug === "california-highway-patrol-truckee-field-office")!;
-  const emery = PROJECTS.find((p) => p.slug === "the-emery")!;
-
   return (
-    <div className="w-full">
-      {/* 1. Hero Section with 5 Market Cards */}
-      <HomeHero />
+    <div className="w-full space-y-16 sm:space-y-24">
+      {/* 1. Flagship Cybernetic Hero Section with 3D Canvas Projection */}
+      <HeroFlagship />
 
-      {/* 2. Manifesto / Studio Intro */}
-      <section className="py-24 md:py-36 bg-white text-[#262626]">
-        <div className="max-w-[1920px] mx-auto px-6 md:px-16 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          <div className="lg:col-span-8 space-y-6">
-            <span className="font-S text-[#737373] tracking-wider uppercase block">
-              Listen. Plan. Analyze. Shape.
-            </span>
-            <h2 className="font-XXL md:font-3XL font-normal tracking-tight text-[#141414]">
-              Clear Process. Creative Results. Human Centered. Always Curious.
+      {/* 2. Signature Bento Grid Showcase with Native Audio Synthesis & Pulse Controls */}
+      <BentoGridShowcase />
+
+      {/* 3. Interactive Hardware Exploded View Teardown */}
+      <ExplodedViewInteractive />
+
+      {/* 4. Real-time Telemetry Tolerances & Lab Benchmarks */}
+      <TelemetryMetrics />
+
+      {/* 5. Custom Hardware Configurator Teaser & Direct Fleet Dispatch CTA */}
+      <section className="py-20 px-6 md:px-16 max-w-[1920px] mx-auto">
+        <div className="relative rounded-3xl overflow-hidden border border-cyan-500/20 bg-gradient-to-r from-cyan-950/40 via-neutral-900/60 to-purple-950/40 p-8 md:p-16 text-center backdrop-blur-xl shadow-[0_0_50px_rgba(0,245,255,0.08)]">
+          <div className="absolute inset-0 bg-[radial-gradient(#00F5FF_1px,transparent_1px)] [background-size:24px_24px] opacity-10 pointer-events-none" />
+
+          <div className="relative z-10 max-w-3xl mx-auto space-y-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-cyan-400/30 bg-cyan-950/60 text-cyan-300 font-mono text-xs">
+              <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+              BESPOKE FABRICATION PIPELINE ACTIVE
+            </div>
+
+            <h2 className="text-3xl md:text-5xl font-black font-display uppercase tracking-tight text-white">
+              BUILD YOUR CUSTOM <span className="text-cyan-400">CYBERNETIC RIG</span>
             </h2>
-            <p className="font-M text-[#737373] max-w-3xl leading-relaxed">
-              At LPAS, we design with people at the center and purpose at every turn. We believe great architecture starts by listening, truly listening, to the communities, students, families, and leaders who will live, learn, and grow in the spaces we create. Our process is open, honest, and relentlessly collaborative.
+
+            <p className="text-neutral-400 font-body text-base md:text-lg leading-relaxed">
+              Step into the KINETIX Studio. Select precision chassis finishes, laser-engraved cryptographic signatures, and custom neural expansions in real-time.
             </p>
-            <div className="pt-4">
-              <ButtonArrow href="/about" title="More about us" color="dark" />
+
+            <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
+              <Link
+                href="/studio"
+                className="px-8 py-4 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-black font-bold font-mono text-sm uppercase tracking-wider transition-all duration-200 shadow-[0_0_25px_rgba(0,245,255,0.4)] hover:scale-105"
+              >
+                LAUNCH STUDIO CONFIGURATOR →
+              </Link>
+              <Link
+                href="/products"
+                className="px-8 py-4 rounded-xl border border-white/20 hover:border-cyan-400/50 bg-black/40 hover:bg-white/5 text-white font-mono text-sm uppercase tracking-wider transition-all duration-200"
+              >
+                EXPLORE ALL HARDWARE
+              </Link>
             </div>
           </div>
         </div>
       </section>
-
-      {/* 3. Featured Work: A Selection of Our Work */}
-      <section className="py-24 bg-[#f9f9f9] text-[#262626]">
-        <div className="max-w-[1920px] mx-auto px-6 md:px-16">
-          {/* Header */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-black/10 pb-8 mb-16 gap-6">
-            <div>
-              <span className="font-XS text-[#737373] uppercase tracking-widest block mb-2">
-                Portfolio Focus
-              </span>
-              <h2 className="font-XXL">A selection of our work</h2>
-            </div>
-
-            {/* Quick Sector Filter Links */}
-            <div className="flex flex-wrap items-center gap-3">
-              <Link
-                href="/portfolio?market=housing"
-                className="px-4 py-1.5 rounded-full bg-black/5 hover:bg-black/10 text-[1.3rem] transition-colors"
-              >
-                Housing <span className="text-xs opacity-60">30</span>
-              </Link>
-              <Link
-                href="/portfolio?market=interiors"
-                className="px-4 py-1.5 rounded-full bg-black/5 hover:bg-black/10 text-[1.3rem] transition-colors"
-              >
-                Interiors <span className="text-xs opacity-60">17</span>
-              </Link>
-              <Link
-                href="/portfolio?market=higher-education"
-                className="px-4 py-1.5 rounded-full bg-black/5 hover:bg-black/10 text-[1.3rem] transition-colors"
-              >
-                Higher Education <span className="text-xs opacity-60">13</span>
-              </Link>
-              <Link
-                href="/portfolio?market=civic"
-                className="px-4 py-1.5 rounded-full bg-black/5 hover:bg-black/10 text-[1.3rem] transition-colors"
-              >
-                Civic <span className="text-xs opacity-60">6</span>
-              </Link>
-              <Link
-                href="/portfolio?market=commercial"
-                className="px-4 py-1.5 rounded-full bg-black/5 hover:bg-black/10 text-[1.3rem] transition-colors"
-              >
-                Commercial <span className="text-xs opacity-60">14</span>
-              </Link>
-              <div className="ml-2">
-                <ButtonArrow href="/portfolio" title="All projects" color="dark" />
-              </div>
-            </div>
-          </div>
-
-          {/* Asymmetric Layout One */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-16 items-start">
-            {/* 1 Large with Top-Left Clipped Corner */}
-            <div className="lg:col-span-8">
-              <ProjectCard
-                project={lasPositas}
-                large={true}
-                clippedCorner="tl"
-              />
-            </div>
-            {/* 2 Stacked Medium Cards */}
-            <div className="lg:col-span-4 flex flex-col gap-8">
-              <ProjectCard project={prospera} />
-              <ProjectCard project={ucDavis} />
-            </div>
-          </div>
-
-          {/* Asymmetric Layout Two */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            {/* 2 Stacked Medium Cards */}
-            <div className="lg:col-span-4 flex flex-col gap-8 order-2 lg:order-1">
-              <ProjectCard project={frederic} />
-              <ProjectCard project={chp} />
-            </div>
-            {/* 1 Large with Bottom-Right Clipped Corner */}
-            <div className="lg:col-span-8 order-1 lg:order-2">
-              <ProjectCard
-                project={emery}
-                large={true}
-                clippedCorner="br"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 4. Latest Updates & News with Hover Image Reveal */}
-      <LatestUpdatesList />
     </div>
   );
 }

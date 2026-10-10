@@ -1,164 +1,165 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
-import { LogoIcon, ArrowIcon } from "../ui/Icons";
-import { ButtonLine } from "../ui/ButtonLine";
-import { MARKETS } from "@/data/markets";
+import { sound } from "@/lib/audioEngine";
 
 export function Footer() {
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+  const [email, setEmail] = useState("");
+  const [subscribed, setSubscribed] = useState(false);
+
+  const handleSubscribe = (e: React.FormEvent) => {
+    e.preventDefault();
+    sound.playClick(1900);
+    setSubscribed(true);
   };
 
   return (
-    <footer className="bg-[#141414] text-white pt-20 pb-12 mt-24">
+    <footer className="bg-[#050608] border-t border-white/10 text-white pt-20 pb-12 mt-28 font-body">
       <div className="max-w-[1920px] mx-auto px-6 md:px-16">
-        {/* Top Hero Banner */}
-        <div className="relative w-full h-[40vh] md:h-[55vh] rounded-2xl overflow-hidden mb-16">
-          <div
-            className="absolute inset-0 bg-cover bg-center"
-            style={{
-              backgroundImage: `url('https://lpas.com/wp-content/uploads/2025/10/12_Block-52_Madison-by-Lennar.jpg')`,
-            }}
-          />
-          <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px]" />
-          <div className="absolute inset-0 p-8 md:p-16 flex flex-col justify-end">
-            <h2 className="font-XXL md:font-3XL font-normal tracking-tight max-w-3xl">
-              Designing with people at the center and purpose at every turn.
-            </h2>
-          </div>
-        </div>
-
-        {/* Navigation Grid */}
+        {/* Top Grid */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 border-b border-white/10 pb-16">
-          {/* Brand Col */}
-          <div className="md:col-span-4 flex flex-col justify-between">
-            <Link href="/" aria-label="LPAS Home">
-              <LogoIcon className="w-32 h-auto text-white" />
-            </Link>
-            <div className="mt-8 text-white/60 font-S">
-              Clear Process. Creative Results.<br />
-              Human-centered. Always Curious.
+          {/* Brand & Manifesto */}
+          <div className="md:col-span-4 space-y-4">
+            <div className="flex items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 shadow-[0_0_10px_#00F5FF]" />
+              <span className="font-display font-bold text-lg tracking-wider">
+                KINETIX
+              </span>
+              <span className="font-mono text-xs text-white/40">// TOKO TECH KEKINIAN</span>
+            </div>
+            <p className="text-white/60 text-sm leading-relaxed max-w-sm">
+              Autonomous cybernetic hardware, neural computing wearables, and spatial audio acoustics engineered for the post-cloud era.
+            </p>
+            <div className="font-mono text-[11px] text-cyan-400">
+              DEPLOYED VIA TOKOTECHKEKINIAN.BIZ.ID
             </div>
           </div>
 
-          {/* Markets Col */}
-          <div className="md:col-span-4">
-            <span className="font-S text-white/50 block mb-6">Our Focus</span>
-            <ul className="space-y-3 font-M">
-              {MARKETS.map((m) => (
-                <li key={m.slug}>
-                  <Link
-                    href={`/markets/${m.slug}`}
-                    className="hover:text-white/70 transition-colors"
-                  >
-                    {m.title}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Company Col */}
-          <div className="md:col-span-4">
-            <span className="font-S text-white/50 block mb-6">Explore</span>
-            <ul className="space-y-3 font-M">
+          {/* Links Column 1: Hardware */}
+          <div className="md:col-span-2 space-y-3 font-mono text-xs">
+            <span className="text-white/40 uppercase tracking-widest block mb-4">
+              Hardware Fleet
+            </span>
+            <ul className="space-y-2.5">
               <li>
-                <Link href="/portfolio" className="hover:text-white/70 transition-colors">
-                  Portfolio
+                <Link href="/products/kinetix-deck-01" className="text-white/70 hover:text-cyan-400 transition-colors">
+                  Deck-01 Synth
                 </Link>
               </li>
               <li>
-                <Link href="/latest" className="hover:text-white/70 transition-colors">
-                  Latest Updates
+                <Link href="/products/neuroring-gen-4" className="text-white/70 hover:text-cyan-400 transition-colors">
+                  NeuroRing Gen-4
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="hover:text-white/70 transition-colors">
-                  About
+                <Link href="/products/spatial-visor-x" className="text-white/70 hover:text-cyan-400 transition-colors">
+                  Spatial Visor X
                 </Link>
               </li>
               <li>
-                <Link href="/culture" className="hover:text-white/70 transition-colors">
-                  Culture
+                <Link href="/products/cybernetic-chronograph-01" className="text-white/70 hover:text-cyan-400 transition-colors">
+                  Chronograph 01
                 </Link>
               </li>
               <li>
-                <Link href="/careers" className="hover:text-white/70 transition-colors">
-                  Careers
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="hover:text-white/70 transition-colors">
-                  Contact
+                <Link href="/products/kinetix-neural-node" className="text-white/70 hover:text-cyan-400 transition-colors">
+                  Neural Node
                 </Link>
               </li>
             </ul>
           </div>
+
+          {/* Links Column 2: Foundry */}
+          <div className="md:col-span-2 space-y-3 font-mono text-xs">
+            <span className="text-white/40 uppercase tracking-widest block mb-4">
+              Foundry & OS
+            </span>
+            <ul className="space-y-2.5">
+              <li>
+                <Link href="/studio" className="text-white/70 hover:text-cyan-400 transition-colors">
+                  Customizer Studio
+                </Link>
+              </li>
+              <li>
+                <Link href="/ecosystem" className="text-white/70 hover:text-cyan-400 transition-colors">
+                  Spatial OS
+                </Link>
+              </li>
+              <li>
+                <Link href="/journal" className="text-white/70 hover:text-cyan-400 transition-colors">
+                  R&D Whitepapers
+                </Link>
+              </li>
+              <li>
+                <Link href="/about" className="text-white/70 hover:text-cyan-400 transition-colors">
+                  Manifesto
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="text-white/70 hover:text-cyan-400 transition-colors">
+                  Transmission Hub
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Newsletter Terminal */}
+          <div className="md:col-span-4 space-y-4">
+            <span className="font-mono text-xs text-white/40 uppercase tracking-widest block">
+              Direct Firmware Telemetry
+            </span>
+            <p className="text-xs text-white/60">
+              Receive encrypted production batch release logs and hardware drops.
+            </p>
+
+            {subscribed ? (
+              <div className="p-3 rounded-lg bg-cyan-500/10 border border-cyan-400/40 text-cyan-300 font-mono text-xs">
+                ✓ NODE COMMUNICATOR SUBSCRIBED
+              </div>
+            ) : (
+              <form onSubmit={handleSubscribe} className="flex gap-2">
+                <input
+                  type="email"
+                  required
+                  placeholder="agent@domain.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="flex-1 px-4 py-2 rounded-lg bg-white/5 border border-white/10 text-white text-xs font-mono focus:outline-none focus:border-cyan-400"
+                />
+                <button
+                  type="submit"
+                  className="px-4 py-2 rounded-lg bg-cyan-400 text-black font-mono font-bold text-xs hover:bg-cyan-300 transition-colors"
+                >
+                  JOIN
+                </button>
+              </form>
+            )}
+          </div>
         </div>
 
-        {/* Office Contact Columns */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 py-12 border-b border-white/10 text-white/70 font-S">
-          <div className="md:col-span-5">
-            <h3 className="font-semibold text-white mb-2">Sacramento Headquarters</h3>
-            <p>723 S Street, Suite 150<br />Sacramento, CA 95811</p>
-            <p className="mt-2">
-              <a href="tel:916-443-0335" className="hover:text-white transition-colors">
-                916 443 0335
-              </a>
-            </p>
-          </div>
-
-          <div className="md:col-span-5">
-            <h3 className="font-semibold text-white mb-2">Oakland Studio</h3>
-            <p>10 Clay Street, Suite 250<br />Oakland, CA 94607</p>
-            <p className="mt-2">
-              <a href="tel:415-213-0335" className="hover:text-white transition-colors">
-                415 213 0335
-              </a>
-            </p>
-          </div>
-
-          <div className="md:col-span-2 flex items-start md:justify-end">
-            <button
-              type="button"
-              onClick={scrollToTop}
-              className="group inline-flex items-center gap-2 text-white/70 hover:text-white text-[1.4rem] font-medium transition-colors"
-            >
-              <span>Back to top</span>
-              <span className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center group-hover:border-white transition-colors -rotate-90">
-                <ArrowIcon className="w-3.5 h-3.5" />
-              </span>
-            </button>
-          </div>
-        </div>
-
-        {/* Bottom Social & Legal */}
-        <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-white/50 text-[1.2rem]">
+        {/* Global Hub Coordinates */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 py-8 border-b border-white/10 text-xs font-mono text-white/50">
           <div>
-            © 2026 LPAS Architecture + Design. Target domain: tokotechkekinian.biz.id
+            <span className="text-white block font-bold mb-1">JAKARTA FOUNDRY & LAB</span>
+            <p>SCBD Lot 28, Cyber Defense Tower, Jakarta 12190</p>
+            <p className="text-cyan-400/80 mt-1">COORDS: -6.2297° S, 106.8094° E</p>
           </div>
+          <div>
+            <span className="text-white block font-bold mb-1">TOKYO PRECISION STUDIO</span>
+            <p>Akihabara Kinetic Technology District 4F, Tokyo 101-0021</p>
+            <p className="text-cyan-400/80 mt-1">COORDS: 35.6983° N, 139.7731° E</p>
+          </div>
+        </div>
 
-          <div className="flex gap-6">
-            <ButtonLine
-              href="https://www.instagram.com/lpas.design"
-              label="Instagram"
-              color="white"
-              target="_blank"
-            />
-            <ButtonLine
-              href="https://www.linkedin.com/company/lpas-architecture-and-design"
-              label="LinkedIn"
-              color="white"
-              target="_blank"
-            />
-            <ButtonLine
-              href="https://www.facebook.com/LPAS-Architecture-Design-200127570010089"
-              label="Facebook"
-              color="white"
-              target="_blank"
-            />
+        {/* Legal & Status */}
+        <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-mono text-white/40">
+          <div>
+            © 2026 KINETIX // Toko Tech Kekinian. All Systems Autonomous.
+          </div>
+          <div className="flex items-center gap-2 text-cyan-400">
+            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+            <span>GLOBAL MESH ONLINE [VER: 2.0.26-TTK]</span>
           </div>
         </div>
       </div>

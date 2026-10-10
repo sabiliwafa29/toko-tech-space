@@ -1,128 +1,173 @@
 "use client";
 
-import React, { useState } from "react";
-import { TEAM_MEMBERS, TeamMember } from "@/data/team";
-import { TeamDrawer } from "@/components/sections/TeamDrawer";
+import React from "react";
+import Link from "next/link";
+import { sound } from "@/lib/audioEngine";
+
+const tenets = [
+  {
+    code: "TENET_01",
+    title: "TACTILITY OVER EPHEMERAL GLASS",
+    desc: "Touchscreens reduce human expression to flat, frictionless smudges. We build heavy, knurled, solid-state instruments with mechanical tactile switches and precision faders that create deep muscle memory.",
+  },
+  {
+    code: "TENET_02",
+    title: "LOCAL SILICON SOVEREIGNTY",
+    desc: "Your thoughts and creative stems belong to you. Our hardware executes 100% of its neural and DSP workloads locally on air-gapped silicon. Zero telemetry leaks. Zero cloud dependence.",
+  },
+  {
+    code: "TENET_03",
+    title: "THE SUB-MILLISECOND STANDARD",
+    desc: "If sound or feedback takes more than 1 millisecond to respond, the illusion of reality is shattered. We optimize signal paths directly on FPGA state machines to achieve sub-0.8ms roundtrips.",
+  },
+  {
+    code: "TENET_04",
+    title: "JAKARTA × TOKYO ARCHITECTURE",
+    desc: "Born at the intersection of Tokyo's precision synth lineage and Jakarta's relentless electronic counter-culture. Brutalist aerospace aluminum infused with neon cybernetic soul.",
+  },
+];
+
+const labs = [
+  {
+    city: "JAKARTA",
+    role: "HARDWARE FOUNDRY & ASSEMBLY",
+    coords: "06.2088° S, 106.8456° E",
+    spec: "5-Axis High Speed CNC Milling, Surface Finishing, Final Acoustic Calibration",
+  },
+  {
+    city: "TOKYO",
+    role: "ACOUSTIC DSP & NEURAL R&D",
+    coords: "35.6762° N, 139.6503° E",
+    spec: "FPGA State Machine Architecture, Bio-Potential EEG Signal Modeling, ASIC Design",
+  },
+];
 
 export default function AboutPage() {
-  const [activeFilter, setActiveFilter] = useState<"All" | "Leadership" | "Sacramento" | "Oakland">("All");
-  const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null);
-
-  const filteredTeam = TEAM_MEMBERS.filter((m) => {
-    if (activeFilter === "All") return true;
-    if (activeFilter === "Leadership") return m.category === "Leadership";
-    if (activeFilter === "Sacramento") return m.office === "Sacramento";
-    if (activeFilter === "Oakland") return m.office === "Oakland";
-    return true;
-  });
-
   return (
-    <div className="pt-32 pb-24 bg-white text-[#262626]">
-      {/* 1. Header Block */}
-      <div className="max-w-[1920px] mx-auto px-6 md:px-16 mb-16">
-        <div className="border-b border-black/10 pb-8 mb-8">
-          <span className="font-S text-[#737373] uppercase tracking-wider block mb-2">
-            Creativity, Community, Connection
-          </span>
-          <h1 className="font-3XL">About</h1>
-          <p className="font-L text-[#737373] max-w-3xl mt-4">
-            We believe the best designs emerge when diverse voices come together to imagine and build with purpose.
-          </p>
+    <div className="max-w-[1920px] mx-auto px-6 md:px-16 py-12">
+      {/* Top Header */}
+      <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-white/10 pb-8 mb-16 gap-6">
+        <div>
+          <div className="flex items-center gap-2 mb-3">
+            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
+            <span className="font-mono text-xs uppercase tracking-widest text-cyan-400">
+              FOUNDRY MANIFESTO // TOKO TECH KEKINIAN
+            </span>
+          </div>
+          <h1 className="text-4xl md:text-6xl font-black font-display uppercase tracking-tight text-white">
+            THE KINETIX <span className="text-cyan-400">FOUNDRY</span>
+          </h1>
         </div>
 
-        {/* Hero Photo Banner */}
-        <div className="relative w-full h-[45vh] md:h-[65vh] rounded-2xl overflow-hidden bg-[#f4f4f4] mb-16">
-          <div
-            className="absolute inset-0 bg-cover bg-center"
-            style={{
-              backgroundImage: `url('https://lpas.com/wp-content/uploads/2025/12/02_LPAS-723-S-Street-Headquarters.jpg')`,
-            }}
-          />
+        <p className="max-w-md font-mono text-xs sm:text-sm text-neutral-400 leading-relaxed">
+          We engineer post-silicon instruments, neural interfaces, and cyberdecks designed to outlive the planned obsolescence of modern consumer electronics.
+        </p>
+      </div>
+
+      {/* Hero Manifesto Statement */}
+      <div className="p-8 sm:p-14 rounded-3xl border border-white/10 bg-neutral-900/60 backdrop-blur-xl mb-24 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl pointer-events-none" />
+
+        <div className="max-w-4xl space-y-6 relative z-10">
+          <span className="font-mono text-xs uppercase tracking-widest text-cyan-400 block">
+            ESTABLISHED 2026 // FABRICATION DISPATCH
+          </span>
+          <h2 className="text-2xl sm:text-4xl font-black font-display uppercase tracking-tight text-white leading-snug">
+            WE REJECT PLASTIC TOYS AND CLOUD-LOCKED LEASES. WE BUILD MONOLITHIC INSTRUMENTS FOR OPERATORS WHO DEMAND TACTILE TRUTH.
+          </h2>
+          <p className="text-neutral-300 font-body text-sm sm:text-base leading-relaxed">
+            Every piece of hardware bearing the KINETIX badge is milled from solid 6061 billet aluminum or sintered grade-5 titanium. Inside, discrete analog preamps and bare-metal FPGA state machines replace bloated layers of mobile operating systems.
+          </p>
         </div>
       </div>
 
-      {/* 2. Philosophy & Overview */}
-      <section className="max-w-[1920px] mx-auto px-6 md:px-16 mb-24">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 border-b border-black/10 pb-16">
-          <div className="lg:col-span-5">
-            <span className="font-XS uppercase tracking-widest text-[#737373] block mb-4">
-              Our Practice
-            </span>
-            <h2 className="font-XL leading-tight">
-              LPAS Architecture + Design is an award-winning multidisciplinary firm providing architecture, interior design, and planning services.
-            </h2>
-          </div>
-          <div className="lg:col-span-7 space-y-6 font-M text-[#737373] leading-relaxed">
-            <p>
-              With offices in Sacramento and Oakland, LPAS works collaboratively with clients on higher education, civic, housing, and commercial projects that respond to context, community, and purpose.
-            </p>
-            <p>
-              Our philosophy reflects an open process uniting design disciplines with client goals to produce thoughtful, lasting built environments. Our work emphasizes environmental responsibility, sense of place, and design excellence that supports both operational performance and community value.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* 3. Team Directory */}
-      <section className="max-w-[1920px] mx-auto px-6 md:px-16">
-        {/* Header & Filter Tabs */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-black/10 pb-8 mb-12 gap-6">
-          <div>
-            <span className="font-XS uppercase tracking-widest text-[#737373] block mb-2">
-              Our People
-            </span>
-            <h2 className="font-XXL">People shape the spaces we design.</h2>
-          </div>
-
-          <div className="flex flex-wrap gap-2">
-            {(["All", "Leadership", "Sacramento", "Oakland"] as const).map((tab) => (
-              <button
-                key={tab}
-                type="button"
-                onClick={() => setActiveFilter(tab)}
-                className={`px-5 py-2 rounded-full font-S transition-colors ${
-                  activeFilter === tab
-                    ? "bg-[#262626] text-white"
-                    : "bg-black/5 hover:bg-black/10 text-[#262626]"
-                }`}
-              >
-                {tab}
-              </button>
-            ))}
-          </div>
+      {/* 4 Core Tenets Grid */}
+      <div className="mb-24">
+        <div className="flex items-center gap-3 mb-8">
+          <span className="w-2 h-2 rounded-full bg-cyan-400" />
+          <h2 className="font-mono text-xs uppercase tracking-widest text-neutral-400">
+            ENGINEERING PRINCIPLES
+          </h2>
         </div>
 
-        {/* Team Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {filteredTeam.map((member) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {tenets.map((t) => (
             <div
-              key={member.slug}
-              onClick={() => setSelectedMember(member)}
-              className="group cursor-pointer block"
-              data-showblob="View Bio"
+              key={t.code}
+              onMouseEnter={() => sound.playHover()}
+              className="p-8 rounded-2xl border border-white/10 bg-neutral-900/40 hover:border-cyan-400/40 hover:shadow-[0_0_30px_rgba(0,245,255,0.1)] transition-all duration-300"
             >
-              <div className="relative h-96 rounded-2xl overflow-hidden bg-[#f4f4f4] mb-4">
-                <div
-                  className="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-500 ease-out"
-                  style={{ backgroundImage: `url('${member.image}')` }}
-                />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors" />
-              </div>
-              <h3 className="font-L group-hover:underline">{member.name}</h3>
-              <p className="font-S text-[#737373] mt-0.5">{member.role}</p>
-              <span className="font-XS text-[#737373] uppercase tracking-wider block mt-1">
-                {member.office} Studio
+              <span className="font-mono text-xs text-cyan-400 block mb-2 font-bold">
+                {t.code}
               </span>
+              <h3 className="text-xl font-bold font-display text-white mb-3">
+                {t.title}
+              </h3>
+              <p className="text-sm text-neutral-400 font-body leading-relaxed">
+                {t.desc}
+              </p>
             </div>
           ))}
         </div>
-      </section>
+      </div>
 
-      {/* Slide-out Bio Modal */}
-      <TeamDrawer
-        member={selectedMember}
-        onClose={() => setSelectedMember(null)}
-      />
+      {/* Global Lab Locations */}
+      <div className="mb-24">
+        <div className="flex items-center gap-3 mb-8">
+          <span className="w-2 h-2 rounded-full bg-cyan-400" />
+          <h2 className="font-mono text-xs uppercase tracking-widest text-neutral-400">
+            LABORATORY HUBS
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {labs.map((lab) => (
+            <div
+              key={lab.city}
+              className="p-8 rounded-2xl border border-white/10 bg-black/40 backdrop-blur-md relative"
+            >
+              <div className="flex items-center justify-between mb-4">
+                <span className="font-mono text-xs text-cyan-400 font-bold">
+                  {lab.role}
+                </span>
+                <span className="font-mono text-xs text-neutral-500">
+                  {lab.coords}
+                </span>
+              </div>
+              <h3 className="text-3xl font-black font-display text-white uppercase mb-2">
+                {lab.city}
+              </h3>
+              <p className="text-xs text-neutral-400 font-mono">
+                {lab.spec}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Bottom Dispatch CTA */}
+      <div className="p-10 rounded-2xl border border-cyan-400/20 bg-cyan-950/20 text-center max-w-3xl mx-auto backdrop-blur-md">
+        <h3 className="text-2xl font-bold font-display uppercase text-white mb-3">
+          WANT TO INSPECT OUR HARDWARE IN PERSON?
+        </h3>
+        <p className="text-neutral-400 font-body text-xs sm:text-sm mb-6">
+          Schedule a private bench listening session or explore our complete catalog of cybernetic instruments.
+        </p>
+        <div className="flex flex-wrap items-center justify-center gap-4">
+          <Link
+            href="/contact"
+            className="px-6 py-3 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-black font-mono text-xs font-bold uppercase transition-all shadow-[0_0_20px_rgba(0,245,255,0.3)]"
+          >
+            DISPATCH LAB INQUIRY →
+          </Link>
+          <Link
+            href="/products"
+            className="px-6 py-3 rounded-xl border border-white/20 hover:border-white/40 text-white font-mono text-xs font-bold uppercase transition-all"
+          >
+            EXPLORE HARDWARE
+          </Link>
+        </div>
+      </div>
     </div>
   );
 }
